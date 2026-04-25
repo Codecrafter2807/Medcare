@@ -221,7 +221,7 @@ const SymptomChecker = () => {
                           __html: msg.text
                             .replace(/\*\*(.*?)\*\*/g, '<strong class="text-primaryColor">$1</strong>')
                             .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline font-bold">$1</a>')
-                            .replace(/(?<!["=])(https?:\/\/[^\s\)]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline font-bold truncate inline-block max-w-[200px] align-bottom">View on Maps</a>')
+                            .replace(/(?<!["=])(https?:\/\/[^\s)]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline font-bold truncate inline-block max-w-[200px] align-bottom">View on Maps</a>')
                             .replace(/\n/g, '<br />')
                         }} />
                       </div>
