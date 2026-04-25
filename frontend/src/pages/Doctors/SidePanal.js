@@ -29,34 +29,46 @@ const SidePanal = ({ doctorId, charges, timeSlots }) => {
   };
 
   return (
-    <div className="shadow-panelShadow p-3 lg:p-5 rounded-md">
-      <div className="flex items-center justify-between">
-        <p className="textPara mt-0 font-semibold">Visiting Charges</p>
-        <span className="text-[16px] leading-4 lg:text-[22px] lg:leading-4 text-darkColor font-bold">
+    <div className="glass-card p-6 lg:p-8 space-y-8 bg-white/90">
+      <div className="flex items-center justify-between border-b border-gray-100 pb-6">
+        <p className="text-gray-500 font-bold uppercase tracking-wider text-xs">Visiting Charges</p>
+        <span className="text-3xl font-black text-darkColor tracking-tight">
           &#8377;{charges}
         </span>
       </div>
-      <div className="mt-[20px]">
-        <p className="textPara mt-0 font-semibold text-darkColor">
-          Available Time Slots:
-        </p>
+      
+      <div className="space-y-4">
+        <div className="flex items-center gap-2">
+          <div className="w-1.5 h-6 bg-primaryColor rounded-full"></div>
+          <p className="text-lg font-bold text-darkColor tracking-tight">
+            Available Time Slots
+          </p>
+        </div>
 
-        <ul className="mt-3">
+        <ul className="space-y-4">
           {timeSlots?.map((item, index) => (
-            <li key={index} className="flex items-center justify-between mb-2">
-              <p className="text-[15px] leading-6 text-gray-700 font-semibold">
+            <li key={index} className="flex items-center justify-between p-4 rounded-2xl bg-gray-50/50 border border-gray-100 hover:border-primaryColor/20 transition-all group">
+              <p className="text-[15px] text-gray-600 font-bold group-hover:text-primaryColor transition-colors">
                 {item.day.charAt(0).toUpperCase() + item.day.slice(1)}
               </p>
-              <p className="text-[15px] leading-6 text-gray-700 font-semibold">
-                {convertTime(item.startingTime)} -{convertTime(item.endingTime)}
+              <p className="text-[14px] text-gray-500 font-bold bg-white px-3 py-1 rounded-lg border border-gray-100 shadow-sm">
+                {convertTime(item.startingTime)} - {convertTime(item.endingTime)}
               </p>
             </li>
           ))}
         </ul>
       </div>
-      <button onClick={bookingHandler} className="btn px-2 w-full rounded-md">
+
+      <button 
+        onClick={bookingHandler} 
+        className="btn w-full !py-4 shadow-xl shadow-primaryColor/20 hover:shadow-2xl hover:shadow-primaryColor/30 transition-all duration-500"
+      >
         Book Appointment
       </button>
+      
+      <p className="text-center text-xs font-medium text-gray-400">
+        Secure checkout powered by Stripe
+      </p>
     </div>
   );
 };

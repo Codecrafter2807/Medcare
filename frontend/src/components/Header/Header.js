@@ -67,18 +67,19 @@ const Header = () => {
         <div className="hidden md:block" ref={menuRef} onClick={toggleMenu}>
           <ul className="flex items-center gap-10">
             {navLinks.map((link, index) => (
-              <li key={index}>
+              <li key={index} className="relative group">
                 <NavLink
                   to={link.path}
                   className={(navClass) =>
-                    `text-base font-semibold transition-all duration-300 ${
+                    `text-base font-bold transition-all duration-300 ${
                       navClass.isActive
                         ? "text-primaryColor"
-                        : "text-gray-600 hover:text-primaryColor"
+                        : "text-gray-500 hover:text-primaryColor"
                     }`
                   }
                 >
                   {link.display}
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-primaryColor transition-all duration-300 rounded-full w-0 group-hover:w-full`}></span>
                 </NavLink>
               </li>
             ))}

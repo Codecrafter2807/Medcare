@@ -42,7 +42,7 @@ const MyAccount = () => {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-extrabold text-darkColor tracking-tight">
+                    <h3 className="text-2xl font-black text-darkColor tracking-tight">
                       {userData.name}
                     </h3>
                     <p className="text-gray-500 text-sm font-medium">
@@ -51,7 +51,7 @@ const MyAccount = () => {
                   </div>
                   <div className="w-full pt-4 border-t border-gray-100">
                     <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Blood Type</p>
-                    <span className="text-2xl font-black text-primaryColor">
+                    <span className="text-3xl font-black text-primaryColor">
                       {userData.bloodType || "N/A"}
                     </span>
                   </div>
@@ -60,7 +60,7 @@ const MyAccount = () => {
                 <div className="space-y-3 pt-4">
                   <button
                     onClick={handleLogout}
-                    className="w-full flex items-center justify-center gap-2 bg-darkColor text-white py-4 rounded-2xl font-bold transition-all duration-300 hover:bg-gray-800 hover:shadow-lg"
+                    className="w-full flex items-center justify-center gap-2 bg-darkColor text-white py-4 rounded-2xl font-bold transition-all duration-300 hover:bg-[#1a202c] hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
                   >
                     <HiOutlineLogout className="w-5 h-5" />
                     Logout
@@ -78,7 +78,7 @@ const MyAccount = () => {
                   onClick={() => setTab("bookings")}
                   className={`flex items-center gap-2 px-8 py-3 rounded-xl font-bold transition-all duration-300 ${
                     tab === "bookings"
-                      ? "bg-primaryColor text-white shadow-lg shadow-primaryColor/20"
+                      ? "bg-primaryColor text-white shadow-xl shadow-primaryColor/20 scale-105"
                       : "text-gray-500 hover:bg-gray-50"
                   }`}
                 >
@@ -89,7 +89,7 @@ const MyAccount = () => {
                   onClick={() => setTab("settings")}
                   className={`flex items-center gap-2 px-8 py-3 rounded-xl font-bold transition-all duration-300 ${
                     tab === "settings"
-                      ? "bg-primaryColor text-white shadow-lg shadow-primaryColor/20"
+                      ? "bg-primaryColor text-white shadow-xl shadow-primaryColor/20 scale-105"
                       : "text-gray-500 hover:bg-gray-50"
                   }`}
                 >
@@ -100,7 +100,7 @@ const MyAccount = () => {
 
               <div className="animate-fade-in">
                 {tab === "bookings" && (
-                   <div className="glass-card p-8 bg-white">
+                   <div className="glass-card p-8 lg:p-12 bg-white">
                       <h3 className="text-2xl font-bold text-darkColor mb-8 flex items-center gap-3">
                         <span className="w-2 h-8 bg-primaryColor rounded-full"></span>
                         Your Appointments
@@ -109,7 +109,7 @@ const MyAccount = () => {
                    </div>
                 )}
                 {tab === "settings" && (
-                  <div className="glass-card p-8 bg-white">
+                  <div className="glass-card p-8 lg:p-12 bg-white">
                     <h3 className="text-2xl font-bold text-darkColor mb-8 flex items-center gap-3">
                       <span className="w-2 h-8 bg-primaryColor rounded-full"></span>
                       Update Profile

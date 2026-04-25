@@ -69,12 +69,12 @@ const DoctorsDetails = () => {
                 </div>
               </div>
 
-              <div className="bg-white p-2 rounded-2xl shadow-sm border border-gray-100 w-fit flex gap-2">
+              <div className="flex items-center gap-4 bg-white p-2 rounded-2xl shadow-sm border border-gray-100 w-fit">
                 <button
                   onClick={() => setTab("about")}
                   className={`px-8 py-3 rounded-xl font-bold transition-all duration-300 ${
                     tab === "about"
-                      ? "bg-primaryColor text-white shadow-lg shadow-primaryColor/20"
+                      ? "bg-primaryColor text-white shadow-xl shadow-primaryColor/20"
                       : "text-gray-500 hover:bg-gray-50"
                   }`}
                 >
@@ -84,7 +84,7 @@ const DoctorsDetails = () => {
                   onClick={() => setTab("feedback")}
                   className={`px-8 py-3 rounded-xl font-bold transition-all duration-300 ${
                     tab === "feedback"
-                      ? "bg-primaryColor text-white shadow-lg shadow-primaryColor/20"
+                      ? "bg-primaryColor text-white shadow-xl shadow-primaryColor/20"
                       : "text-gray-500 hover:bg-gray-50"
                   }`}
                 >
@@ -92,7 +92,7 @@ const DoctorsDetails = () => {
                 </button>
               </div>
 
-              <div className="animate-fade-in glass-card p-10 bg-white">
+              <div className="animate-fade-in glass-card p-8 lg:p-12 bg-white">
                 {tab === "about" && (
                   <DoctorAbout
                     name={name}
