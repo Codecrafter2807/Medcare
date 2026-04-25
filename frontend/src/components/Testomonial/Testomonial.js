@@ -10,7 +10,6 @@ const Testomonial = () => {
   return (
     <div className="mt-[30px] lg:mt-[55px]">
       <Swiper
-        // modules={[Pagination]}
         spaceBetween={30}
         slidesPerView={1}
         pagination={{ clickable: true }}
@@ -32,10 +31,10 @@ const Testomonial = () => {
         <SwiperSlide>
           <div className="py-[20px] px-4 rounded-3 ">
             <div className="flex items-center gap-[4px]">
-              <img className="h-12 w-12" src={patientAvtar} alt="" />
+              <img className="h-12 w-12 rounded-full" src={patientAvtar} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-darkColor">
-                  Harsh Jain
+                  Sarah Johnson
                 </h4>
                 <div className="flex items-center gap-[2px]">
                   <HiStar className="text-yellowColor w-[18px] h-5 " />
@@ -47,18 +46,17 @@ const Testomonial = () => {
               </div>
             </div>
             <p className="text-[16px] leading-7 mt-1 text-gray-600 font-[500]">
-              "I have taken medical services from them. They treat so well and
-              they are providing the best medical services "
+              "The doctors here are incredibly attentive. They took the time to listen to all my concerns and provided an excellent treatment plan."
             </p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="py-[20px] px-4 rounded-3 ">
             <div className="flex items-center gap-[4px]">
-              <img className="h-12 w-12" src={patientAvtar} alt="" />
+              <img className="h-12 w-12 rounded-full" src={patientAvtar} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-darkColor">
-                  Harsh Jain
+                  Michael Chen
                 </h4>
                 <div className="flex items-center gap-[2px]">
                   <HiStar className="text-yellowColor w-[18px] h-5 " />
@@ -70,18 +68,17 @@ const Testomonial = () => {
               </div>
             </div>
             <p className="text-[16px] leading-7 mt-1 text-gray-600 font-[500]">
-              "I have taken medical services from them. They treat so well and
-              they are providing the best medical services "
+              "Booking an appointment was so easy, and the consultation was very professional. Highly recommend this platform for anyone needing quick medical advice."
             </p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="py-[20px] px-4 rounded-3 ">
             <div className="flex items-center gap-[4px]">
-              <img className="h-12 w-12" src={patientAvtar} alt="" />
+              <img className="h-12 w-12 rounded-full" src={patientAvtar} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-darkColor">
-                  Harsh Jain
+                  Emily Davis
                 </h4>
                 <div className="flex items-center gap-[2px]">
                   <HiStar className="text-yellowColor w-[18px] h-5 " />
@@ -93,31 +90,29 @@ const Testomonial = () => {
               </div>
             </div>
             <p className="text-[16px] leading-7 mt-1 text-gray-600 font-[500]">
-              "I have taken medical services from them. They treat so well and
-              they are providing the best medical services "
+              "I have been using Medcare for my family's routine checkups. The specialists are top-notch and always provide the best care possible."
             </p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="py-[20px] px-4 rounded-3 ">
             <div className="flex items-center gap-[4px]">
-              <img className="h-12 w-12" src={patientAvtar} alt="" />
+              <img className="h-12 w-12 rounded-full" src={patientAvtar} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-darkColor">
-                  Harsh Jain
+                  James Wilson
                 </h4>
                 <div className="flex items-center gap-[2px]">
                   <HiStar className="text-yellowColor w-[18px] h-5 " />
                   <HiStar className="text-yellowColor w-[18px] h-5 " />
                   <HiStar className="text-yellowColor w-[18px] h-5 " />
                   <HiStar className="text-yellowColor w-[18px] h-5 " />
-                  <HiStar className="text-yellowColor w-[18px] h-5 " />
+                  <HiStar className="text-gray-300 w-[18px] h-5 " />
                 </div>
               </div>
             </div>
             <p className="text-[16px] leading-7 mt-1 text-gray-600 font-[500]">
-              "I have taken medical services from them. They treat so well and
-              they are providing the best medical services "
+              "Very smooth experience overall. The doctor was knowledgeable and prescribed exactly what I needed to recover quickly."
             </p>
           </div>
         </SwiperSlide>

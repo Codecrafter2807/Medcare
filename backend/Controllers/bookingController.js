@@ -44,11 +44,19 @@ export const getCheckoutSession = async (req, res) => {
       ],
     });
 
+    const { appointmentDate, appointmentTime } = req.body;
+
+    if (!appointmentDate || !appointmentTime) {
+      return res.status(400).json({ success: false, message: "Please select an appointment slot" });
+    }
+
     const booking = new Booking({
       doctor: doctor._id,
       user: user._id,
       charges: charges,
       session: session.id,
+      appointmentDate,
+      appointmentTime,
     });
 
     await booking.save();

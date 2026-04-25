@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import convertTime from "../../utils/convertTime";
 import { BASE_URL, token } from "./../../config";
 import { toast } from "react-toastify";
 
 const SidePanal = ({ doctorId, charges, timeSlots }) => {
+  const [selectedSlot, setSelectedSlot] = useState(null);
+
   const bookingHandler = async () => {
+    if (selectedSlot === null) {
+      toast.error("Please select an appointment slot");
+      return;
+    }
+
     try {
+      const slot = timeSlots[selectedSlot];
       const res = await fetch(
         `${BASE_URL}/bookings/checkout-session/${doctorId}`,
         {
           method: "post",
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          body: JSON.stringify({
+            appointmentDate: slot.day.charAt(0).toUpperCase() + slot.day.slice(1),
+            appointmentTime: `${convertTime(slot.startingTime)} - ${convertTime(slot.endingTime)}`
+          })
         }
       );
       const data = await res.json();
@@ -47,11 +60,21 @@ const SidePanal = ({ doctorId, charges, timeSlots }) => {
 
         <ul className="space-y-4">
           {timeSlots?.map((item, index) => (
-            <li key={index} className="flex items-center justify-between p-4 rounded-2xl bg-gray-50/50 border border-gray-100 hover:border-primaryColor/20 transition-all group">
-              <p className="text-[15px] text-gray-600 font-semibold group-hover:text-primaryColor transition-colors">
+            <li 
+              key={index} 
+              onClick={() => setSelectedSlot(index)}
+              className={`flex items-center justify-between p-4 rounded-2xl border transition-all cursor-pointer group ${
+                selectedSlot === index 
+                ? "bg-primaryColor/5 border-primaryColor shadow-md" 
+                : "bg-gray-50/50 border-gray-100 hover:border-primaryColor/30 hover:bg-white"
+              }`}
+            >
+              <p className={`text-[15px] font-semibold transition-colors ${selectedSlot === index ? "text-primaryColor" : "text-gray-600 group-hover:text-primaryColor"}`}>
                 {item.day.charAt(0).toUpperCase() + item.day.slice(1)}
               </p>
-              <p className="text-[14px] text-gray-500 font-semibold bg-white px-3 py-1 rounded-lg border border-gray-100 shadow-sm">
+              <p className={`text-[14px] font-semibold px-3 py-1 rounded-lg border shadow-sm transition-colors ${
+                selectedSlot === index ? "bg-primaryColor text-white border-primaryColor" : "bg-white text-gray-500 border-gray-100"
+              }`}>
                 {convertTime(item.startingTime)} - {convertTime(item.endingTime)}
               </p>
             </li>
