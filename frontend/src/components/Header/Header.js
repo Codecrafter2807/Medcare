@@ -64,8 +64,8 @@ const Header = () => {
           </span>
         </Link>
 
-        <div className="hidden md:block" ref={menuRef} onClick={toggleMenu}>
-          <ul className="flex items-center gap-10">
+        <div className="nav" ref={menuRef} onClick={toggleMenu}>
+          <ul className="menu flex flex-col md:flex-row items-center gap-10">
             {navLinks.map((link, index) => (
               <li key={index} className="relative group">
                 <NavLink
