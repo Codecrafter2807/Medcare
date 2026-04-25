@@ -32,14 +32,14 @@ const ServicesCard = ({ item, index }) => {
 
       <div className="mt-10 flex items-center justify-between">
         <Link
-          to="/doctors"
+          to={`/doctors?query=${encodeURIComponent(name)}`}
           className="flex items-center gap-2 text-primaryColor font-bold text-sm group/link hover:underline"
         >
           Learn More
           <BsArrowRight className="transition-transform duration-300 group-hover/link:translate-x-1" />
         </Link>
         <Link
-          to="/doctors"
+          to={`/doctors?query=${encodeURIComponent(name)}`}
           className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center group/btn hover:bg-primaryColor transition-all duration-300"
         >
           <BsArrowRight className="text-darkColor group-hover/btn:text-white w-5 h-5 transition-transform duration-300 group-hover/btn:translate-x-1" />

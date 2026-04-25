@@ -9,6 +9,7 @@ import DoctorsDetails from "../pages/Doctors/DoctorsDetails";
 import MyAccount from "../Dashboard/user-account/MyAccount";
 import Dashboard from "../Dashboard/doctor-account/Dashboard";
 import CheckoutSuccess from '../pages/CheckoutSuccess'
+import SymptomChecker from '../pages/SymptomChecker'
 
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
@@ -24,6 +25,7 @@ const Routers = () => {
       <Route path="/signup" element={<Signup />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/services" element={<Services />} />
+      <Route path="/symptom-checker" element={<SymptomChecker />} />
       <Route path="/checkout-success" element={<CheckoutSuccess />} />
       <Route
         path="/users/profile/me"

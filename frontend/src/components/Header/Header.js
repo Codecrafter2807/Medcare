@@ -21,6 +21,10 @@ const navLinks = [
     path: "/contact",
     display: "Contact",
   },
+  {
+    path: "/symptom-checker",
+    display: "Symptom Checker",
+  },
 ];
 const Header = () => {
   const headerRef = useRef(null);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import DoctorCard from "../../components/Doctors/DoctorCard";
-import Testomonial from "../../components/Testomonial/Testomonial";
 // import { doctors } from "./../../assets/data/doctors";
 import { BASE_URL } from "./../../config";
 import useFatchData from "./../../hooks/useFatchData";
@@ -8,10 +8,15 @@ import Loading from "../../components/Loading/Loading";
 import Error from "../../components/Error/Error";
 
 const Doctors = () => {
-  const [query, setQuery] = useState("");
-  const [debounceQuery, setDebounceQuery] = useState('')
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const initialQuery = searchParams.get("query") || "";
 
-  const handleSearch = () => {
+  const [query, setQuery] = useState(initialQuery);
+  const [debounceQuery, setDebounceQuery] = useState(initialQuery);
+
+  const handleSearch = (e) => {
+    e?.preventDefault();
     setQuery(query.trim());
     console.log("handle search");
   };
@@ -69,15 +74,6 @@ const Doctors = () => {
               ))}
             </div>
           )}
-        </div>
-      </section>
-
-      <section>
-        <div className="container">
-          <div className="lg:w-[480px] mx-auto">
-            <h2 className="heading text-center">What our patient say</h2>
-          </div>
-          <Testomonial />
         </div>
       </section>
     </>
