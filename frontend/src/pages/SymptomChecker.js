@@ -49,7 +49,7 @@ const SymptomChecker = () => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isAnalyzing]);
 
-  const handleSymptomSubmit = (symptomInput) => {
+  const handleSymptomSubmit = async (symptomInput) => {
     if (!symptomInput.trim()) return;
 
     // Add user message
@@ -57,28 +57,77 @@ const SymptomChecker = () => {
     setInputValue("");
     setIsAnalyzing(true);
 
-    // Simulate AI processing delay
-    setTimeout(() => {
-      const lowerInput = symptomInput.toLowerCase();
-      let matchedSpecialty = "General Physician"; // Default fallback
+    try {
+      const apiKey = process.env.REACT_APP_GROQ_API_KEY || process.env.VITE_GROQ_API_KEY;
       
-      for (const [key, specialty] of Object.entries(symptomDatabase)) {
-        if (lowerInput.includes(key)) {
-          matchedSpecialty = specialty;
-          break;
-        }
-      }
+      if (apiKey) {
+        // Real Groq API Call
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${apiKey}`,
+          },
+          body: JSON.stringify({
+            model: "llama3-8b-8192",
+            messages: [
+              {
+                role: "system",
+                content: "You are a professional Medical Assistant AI. First, provide brief, empathetic, and professional general home-care advice (e.g., rest, hydration, monitoring) for the user's symptoms. Then, output a JSON tag <SPECIALIST>Specialty Name</SPECIALIST> at the very end of your response (e.g. <SPECIALIST>Neurology</SPECIALIST>) so the system can route them. Keep your total response under 4 sentences."
+              },
+              { role: "user", content: symptomInput }
+            ],
+            temperature: 0.5,
+          }),
+        });
 
+        if (!response.ok) throw new Error("Groq API Error");
+
+        const data = await response.json();
+        const aiMessage = data.choices[0].message.content;
+        
+        // Extract the specialty tag for routing
+        const match = aiMessage.match(/<SPECIALIST>(.*?)<\/SPECIALIST>/);
+        let specialty = null;
+        let cleanText = aiMessage;
+        
+        if (match) {
+          specialty = match[1].trim();
+          cleanText = aiMessage.replace(match[0], "").trim();
+        }
+
+        setMessages((prev) => [...prev, { sender: "ai", text: cleanText, specialty }]);
+        setIsAnalyzing(false);
+      } else {
+        // Fallback: Highly professional simulated response if API key is not configured yet
+        setTimeout(() => {
+          const lowerInput = symptomInput.toLowerCase();
+          let matchedSpecialty = "General Physician"; // Default
+          
+          for (const [key, specialty] of Object.entries(symptomDatabase)) {
+            if (lowerInput.includes(key)) {
+              matchedSpecialty = specialty;
+              break;
+            }
+          }
+
+          const fallbackText = `I understand you are experiencing discomfort. As a first step, prioritize resting, stay well-hydrated, and monitor your symptoms closely. However, since proper medical evaluation is always the safest and most reliable route, I highly recommend scheduling a consultation with a specialist for an accurate diagnosis.`;
+
+          setMessages((prev) => [
+            ...prev,
+            { sender: "ai", text: fallbackText, specialty: matchedSpecialty }
+          ]);
+          setIsAnalyzing(false);
+        }, 1500);
+      }
+    } catch (error) {
+      console.error("AI Error:", error);
       setIsAnalyzing(false);
       setMessages((prev) => [
         ...prev,
-        {
-          sender: "ai",
-          text: `Based on your symptoms, I highly recommend consulting a **${matchedSpecialty}** specialist.`,
-          specialty: matchedSpecialty
-        }
+        { sender: "ai", text: "I'm sorry, I'm having trouble connecting to my AI processor right now. Please consult a doctor directly." }
       ]);
-    }, 1500);
+    }
   };
 
   const handleFormSubmit = (e) => {
