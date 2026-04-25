@@ -27,6 +27,8 @@ const Header = () => {
   const menuRef = useRef(null);
   const { user, role, token } = useContext(authContext);
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const stickyHeader = () => {
     window.addEventListener("scroll", () => {
       if (
@@ -42,11 +44,10 @@ const Header = () => {
 
   useEffect(() => {
     stickyHeader();
-
     return () => window.removeEventListener("scroll", stickyHeader);
   });
 
-  const toggleMenu = () => menuRef.current.classList.toggle("show_menu");
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <header
@@ -64,8 +65,9 @@ const Header = () => {
           </span>
         </Link>
 
-        <div className="nav" ref={menuRef} onClick={toggleMenu}>
-          <ul className="menu flex flex-col md:flex-row items-center gap-10">
+        {/* Desktop Menu */}
+        <div className="hidden md:block">
+          <ul className="flex items-center gap-10">
             {navLinks.map((link, index) => (
               <li key={index} className="relative group">
                 <NavLink
@@ -86,11 +88,40 @@ const Header = () => {
           </ul>
         </div>
 
-        <div className="flex items-center gap-6">
+        {/* Mobile Menu Overlay */}
+        <div 
+          className={`fixed inset-0 bg-black/50 z-[1000] md:hidden transition-opacity duration-300 ${isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
+          onClick={toggleMenu}
+        >
+          <ul 
+            className={`absolute right-0 top-0 w-64 h-full bg-white flex flex-col items-center pt-24 gap-8 shadow-2xl transform transition-transform duration-300 ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {navLinks.map((link, index) => (
+              <li key={index}>
+                <NavLink
+                  to={link.path}
+                  onClick={toggleMenu}
+                  className={(navClass) =>
+                    `text-lg font-bold transition-all duration-300 ${
+                      navClass.isActive
+                        ? "text-primaryColor"
+                        : "text-gray-700 hover:text-primaryColor"
+                    }`
+                  }
+                >
+                  {link.display}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="flex items-center gap-4 md:gap-6">
           {token && user ? (
-            <Link to={`${role === 'doctor' ? '/doctors/profile/me' : '/users/profile/me'}`} className="group">
+            <Link to={`${role === 'doctor' ? '/doctors/profile/me' : '/users/profile/me'}`} className="group block">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl overflow-hidden border-2 border-primaryColor/20 group-hover:border-primaryColor transition-all duration-300 shadow-sm">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl overflow-hidden border-2 border-primaryColor/20 group-hover:border-primaryColor transition-all duration-300 shadow-sm">
                   <img className="w-full h-full object-cover" src={user?.photo} alt="" />
                 </div>
                 <div className="hidden lg:block">
@@ -100,14 +131,14 @@ const Header = () => {
               </div>
             </Link>
           ) : (
-            <Link to="/login">
-              <button className="btn !mt-0 !py-2.5 !px-8 shadow-md">
+            <Link to="/login" className="flex items-center">
+              <button className="btn !m-0 !py-2 !px-6 md:!py-2.5 md:!px-8 shadow-md text-sm md:text-base">
                 Login
               </button>
             </Link>
           )}
 
-          <span className="md:hidden" onClick={toggleMenu}>
+          <span className="md:hidden flex items-center justify-center p-1" onClick={toggleMenu}>
             <BiMenu className="w-8 h-8 text-darkColor cursor-pointer" />
           </span>
         </div>
