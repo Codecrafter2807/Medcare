@@ -60,7 +60,7 @@ const Login = () => {
     <section className="min-h-[80vh] flex items-center justify-center bg-gray-50/50 py-12 px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 glass-card p-10 bg-white">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-darkColor">
+          <h2 className="mt-6 text-center text-[28px] font-bold text-darkColor">
             Welcome <span className="text-primaryColor">Back</span>
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
@@ -111,7 +111,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="btn w-full flex justify-center py-4 text-lg shadow-xl shadow-primaryColor/20"
+              className="btn w-full flex justify-center py-4 text-[17px] font-semibold shadow-xl shadow-primaryColor/20"
             >
               {loading ? <HashLoader size={25} color='#fff' /> : 'Sign In'}
             </button>
@@ -120,7 +120,7 @@ const Login = () => {
           <div className="text-center">
             <p className="text-sm text-gray-600">
               Don't have an account?
-              <Link to="/signup" className="ml-2 font-bold text-primaryColor hover:text-blue-600 transition-all">
+              <Link to="/signup" className="ml-2 font-semibold text-primaryColor hover:text-blue-600 transition-all">
                 Register Now
               </Link>
             </p>

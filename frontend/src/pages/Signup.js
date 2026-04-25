@@ -73,19 +73,13 @@ const Signup = () => {
     <section className="bg-gray-50/50 py-16 px-6">
       <div className="max-w-[1000px] mx-auto glass-card bg-white overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="hidden lg:block bg-primaryColor relative overflow-hidden">
-            <img src={signupImg} alt="Signup" className="w-full h-full object-cover mix-blend-overlay opacity-80" />
-            <div className="absolute inset-0 bg-gradient-to-t from-primaryColor to-transparent flex items-end p-12">
-              <div className="text-white">
-                <h2 className="text-4xl font-bold mb-4">Join Our Community</h2>
-                <p className="text-lg text-white/80">Experience healthcare like never before with AI-powered consultations and personalized care plans.</p>
-              </div>
-            </div>
+          <div className="hidden lg:block relative overflow-hidden bg-white flex items-center justify-center p-8">
+            <img src={signupImg} alt="Signup" className="w-full h-auto object-contain rounded-2xl" />
           </div>
           
           <div className="p-8 lg:p-16 space-y-10">
             <div>
-              <h3 className="text-3xl font-extrabold text-darkColor">
+              <h3 className="text-[28px] font-bold text-darkColor">
                 Create an <span className="text-primaryColor">Account</span>
               </h3>
               <p className="text-gray-500 mt-2">Start your journey towards better health today.</p>
@@ -195,14 +189,14 @@ const Signup = () => {
               <button
                 disabled={loading}
                 type="submit"
-                className="btn w-full py-4 text-lg shadow-xl shadow-primaryColor/20"
+                className="btn w-full py-4 text-[17px] font-semibold shadow-xl shadow-primaryColor/20"
               >
                 {loading ? <HashLoader size={30} color="#ffffff" /> : "Create Account"}
               </button>
 
               <p className="text-center text-gray-600">
                 Already have an account?
-                <Link to="/login" className="ml-2 font-bold text-primaryColor hover:text-blue-600 transition-all">
+                <Link to="/login" className="ml-2 font-semibold text-primaryColor hover:text-blue-600 transition-all">
                   Sign In
                 </Link>
               </p>
