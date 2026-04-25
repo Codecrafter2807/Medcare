@@ -70,14 +70,14 @@ const Signup = () => {
   };
 
   return (
-    <section className="bg-gray-50/50 py-16 px-6">
-      <div className="max-w-[1000px] mx-auto glass-card bg-white overflow-hidden">
+    <section className="bg-gray-50/50 py-8 px-6 min-h-[calc(100vh-80px)] flex items-center justify-center">
+      <div className="max-w-[1000px] w-full mx-auto glass-card bg-white overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="hidden lg:block relative overflow-hidden bg-white flex items-center justify-center p-8">
+          <div className="hidden lg:block relative overflow-hidden bg-white flex items-center justify-center p-4">
             <img src={signupImg} alt="Signup" className="w-full h-auto object-contain rounded-2xl" />
           </div>
           
-          <div className="p-8 lg:p-16 space-y-10">
+          <div className="p-8 lg:p-10 space-y-6">
             <div>
               <h3 className="text-[28px] font-bold text-darkColor">
                 Create an <span className="text-primaryColor">Account</span>
@@ -85,7 +85,7 @@ const Signup = () => {
               <p className="text-gray-500 mt-2">Start your journey towards better health today.</p>
             </div>
 
-            <form onSubmit={submitHandler} className="space-y-6">
+            <form onSubmit={submitHandler} className="space-y-4">
               <div className="space-y-2">
                 <label className="label-field">Full Name</label>
                 <input
@@ -125,7 +125,7 @@ const Signup = () => {
                 />
               </div>
 
-              <div className="flex flex-wrap gap-8 items-center">
+              <div className="flex flex-wrap gap-4 items-center">
                 <div className="space-y-2 flex-1">
                   <label className="label-field">I am a:</label>
                   <select
@@ -155,7 +155,7 @@ const Signup = () => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-4">
                 {selectedFile ? (
                   <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-primaryColor shadow-lg">
                     <img src={previewURL} alt="Preview" className="w-full h-full object-cover" />
@@ -179,7 +179,7 @@ const Signup = () => {
                   />
                   <label
                     htmlFor="customFile"
-                    className="btn !mt-0 !bg-primaryColor/10 !text-primaryColor !shadow-none hover:!bg-primaryColor hover:!text-white flex items-center gap-2 py-3"
+                    className="btn-outline cursor-pointer flex items-center justify-center gap-2 w-full text-center"
                   >
                     Upload Photo
                   </label>

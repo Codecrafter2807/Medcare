@@ -50,71 +50,74 @@ const Header = () => {
 
   return (
     <>
-      <header
-        className="w-full header flex items-center bg-white/50 backdrop-blur-sm z-[999] transition-all duration-300 border-b border-gray-100"
-        ref={headerRef}
-        style={{ height: '80px' }}
-      >
-        <div className="container flex items-center justify-between">
-          <Link to="/home" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primaryColor rounded-xl flex items-center justify-center shadow-lg shadow-primaryColor/20 text-white font-black text-xl">
-              +
+      {/* Placeholder to prevent layout shift when header becomes fixed */}
+      <div style={{ height: '80px' }}>
+        <header
+          className="w-full header flex items-center bg-white/50 backdrop-blur-sm z-[999] transition-all duration-300 border-b border-gray-100"
+          ref={headerRef}
+          style={{ height: '80px' }}
+        >
+          <div className="container flex items-center justify-between">
+            <Link to="/home" className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-primaryColor rounded-xl flex items-center justify-center shadow-lg shadow-primaryColor/20 text-white font-black text-xl">
+                +
+              </div>
+              <span className="text-[22px] font-bold tracking-tight text-darkColor">
+                Health<span className="text-primaryColor">Care</span>
+              </span>
+            </Link>
+
+            {/* Desktop Menu */}
+            <div className="hidden md:block">
+              <ul className="flex items-center gap-10">
+                {navLinks.map((link, index) => (
+                  <li key={index} className="relative group">
+                    <NavLink
+                      to={link.path}
+                      className={(navClass) =>
+                        `text-[15px] font-semibold transition-all duration-300 ${
+                          navClass.isActive
+                            ? "text-primaryColor"
+                            : "text-gray-500 hover:text-primaryColor"
+                        }`
+                      }
+                    >
+                      {link.display}
+                      <span className={`absolute -bottom-1 left-0 h-0.5 bg-primaryColor transition-all duration-300 rounded-full w-0 group-hover:w-full`}></span>
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <span className="text-[22px] font-bold tracking-tight text-darkColor">
-              Health<span className="text-primaryColor">Care</span>
-            </span>
-          </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <ul className="flex items-center gap-10">
-              {navLinks.map((link, index) => (
-                <li key={index} className="relative group">
-                  <NavLink
-                    to={link.path}
-                    className={(navClass) =>
-                      `text-[15px] font-semibold transition-all duration-300 ${
-                        navClass.isActive
-                          ? "text-primaryColor"
-                          : "text-gray-500 hover:text-primaryColor"
-                      }`
-                    }
-                  >
-                    {link.display}
-                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-primaryColor transition-all duration-300 rounded-full w-0 group-hover:w-full`}></span>
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="flex items-center gap-4 md:gap-6">
-            {token && user ? (
-              <Link to={`${role === 'doctor' ? '/doctors/profile/me' : '/users/profile/me'}`} className="group block">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl overflow-hidden border-2 border-primaryColor/20 group-hover:border-primaryColor transition-all duration-300 shadow-sm">
-                    <img className="w-full h-full object-cover" src={user?.photo} alt="" />
+            <div className="flex items-center gap-4 md:gap-6">
+              {token && user ? (
+                <Link to={`${role === 'doctor' ? '/doctors/profile/me' : '/users/profile/me'}`} className="group block">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl overflow-hidden border-2 border-primaryColor/20 group-hover:border-primaryColor transition-all duration-300 shadow-sm">
+                      <img className="w-full h-full object-cover" src={user?.photo} alt="" />
+                    </div>
+                    <div className="hidden lg:block">
+                      <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Welcome back</p>
+                      <p className="text-sm font-semibold text-darkColor">{user?.name?.split(' ')[0]}</p>
+                    </div>
                   </div>
-                  <div className="hidden lg:block">
-                    <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Welcome back</p>
-                    <p className="text-sm font-semibold text-darkColor">{user?.name?.split(' ')[0]}</p>
-                  </div>
-                </div>
-              </Link>
-            ) : (
-              <Link to="/login" className="flex items-center">
-                <button className="btn !m-0 !py-2 !px-6 md:!py-2.5 md:!px-8 shadow-md text-sm md:text-base">
-                  Login
-                </button>
-              </Link>
-            )}
+                </Link>
+              ) : (
+                <Link to="/login" className="flex items-center">
+                  <button className="btn !m-0 !py-2 !px-6 md:!py-2.5 md:!px-8 shadow-md text-sm md:text-base">
+                    Login
+                  </button>
+                </Link>
+              )}
 
-            <span className="md:hidden flex items-center justify-center p-1" onClick={toggleMenu}>
-              <BiMenu className="w-8 h-8 text-darkColor cursor-pointer" />
-            </span>
+              <span className="md:hidden flex items-center justify-center p-1" onClick={toggleMenu}>
+                <BiMenu className="w-8 h-8 text-darkColor cursor-pointer" />
+              </span>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      </div>
 
       {/* Mobile Menu Overlay - Outside Header to prevent backdrop-filter trap */}
       <div 
