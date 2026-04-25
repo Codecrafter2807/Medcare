@@ -53,7 +53,7 @@ const DoctorsDetails = () => {
                   <span className="bg-primaryColor/10 text-primaryColor py-2 px-6 rounded-xl text-sm font-bold uppercase tracking-wider">
                     {specialization}
                   </span>
-                  <h2 className="text-4xl font-extrabold text-darkColor tracking-tight">
+                  <h2 className="text-3xl font-bold text-darkColor tracking-tight">
                     {name}
                   </h2>
                   <div className="flex items-center justify-center md:justify-start gap-6">
@@ -72,7 +72,7 @@ const DoctorsDetails = () => {
               <div className="flex items-center gap-4 bg-white p-2 rounded-2xl shadow-sm border border-gray-100 w-fit">
                 <button
                   onClick={() => setTab("about")}
-                  className={`px-8 py-3 rounded-xl font-bold transition-all duration-300 ${
+                  className={`px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 ${
                     tab === "about"
                       ? "bg-primaryColor text-white shadow-xl shadow-primaryColor/20"
                       : "text-gray-500 hover:bg-gray-50"
@@ -82,7 +82,7 @@ const DoctorsDetails = () => {
                 </button>
                 <button
                   onClick={() => setTab("feedback")}
-                  className={`px-8 py-3 rounded-xl font-bold transition-all duration-300 ${
+                  className={`px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 ${
                     tab === "feedback"
                       ? "bg-primaryColor text-white shadow-xl shadow-primaryColor/20"
                       : "text-gray-500 hover:bg-gray-50"

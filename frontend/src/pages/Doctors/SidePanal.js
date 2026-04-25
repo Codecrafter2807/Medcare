@@ -31,8 +31,8 @@ const SidePanal = ({ doctorId, charges, timeSlots }) => {
   return (
     <div className="glass-card p-6 lg:p-8 space-y-8 bg-white/90">
       <div className="flex items-center justify-between border-b border-gray-100 pb-6">
-        <p className="text-gray-500 font-bold uppercase tracking-wider text-xs">Visiting Charges</p>
-        <span className="text-3xl font-black text-darkColor tracking-tight">
+        <p className="text-gray-500 font-semibold uppercase tracking-wider text-xs">Visiting Charges</p>
+        <span className="text-2xl font-bold text-darkColor tracking-tight">
           &#8377;{charges}
         </span>
       </div>
@@ -40,7 +40,7 @@ const SidePanal = ({ doctorId, charges, timeSlots }) => {
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <div className="w-1.5 h-6 bg-primaryColor rounded-full"></div>
-          <p className="text-lg font-bold text-darkColor tracking-tight">
+          <p className="text-lg font-semibold text-darkColor tracking-tight">
             Available Time Slots
           </p>
         </div>
@@ -48,10 +48,10 @@ const SidePanal = ({ doctorId, charges, timeSlots }) => {
         <ul className="space-y-4">
           {timeSlots?.map((item, index) => (
             <li key={index} className="flex items-center justify-between p-4 rounded-2xl bg-gray-50/50 border border-gray-100 hover:border-primaryColor/20 transition-all group">
-              <p className="text-[15px] text-gray-600 font-bold group-hover:text-primaryColor transition-colors">
+              <p className="text-[15px] text-gray-600 font-semibold group-hover:text-primaryColor transition-colors">
                 {item.day.charAt(0).toUpperCase() + item.day.slice(1)}
               </p>
-              <p className="text-[14px] text-gray-500 font-bold bg-white px-3 py-1 rounded-lg border border-gray-100 shadow-sm">
+              <p className="text-[14px] text-gray-500 font-semibold bg-white px-3 py-1 rounded-lg border border-gray-100 shadow-sm">
                 {convertTime(item.startingTime)} - {convertTime(item.endingTime)}
               </p>
             </li>

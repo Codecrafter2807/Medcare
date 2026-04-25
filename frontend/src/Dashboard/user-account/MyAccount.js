@@ -42,7 +42,7 @@ const MyAccount = () => {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-black text-darkColor tracking-tight">
+                    <h3 className="text-xl font-bold text-darkColor tracking-tight">
                       {userData.name}
                     </h3>
                     <p className="text-gray-500 text-sm font-medium">
@@ -51,7 +51,7 @@ const MyAccount = () => {
                   </div>
                   <div className="w-full pt-4 border-t border-gray-100">
                     <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Blood Type</p>
-                    <span className="text-3xl font-black text-primaryColor">
+                    <span className="text-xl font-bold text-primaryColor">
                       {userData.bloodType || "N/A"}
                     </span>
                   </div>
@@ -60,12 +60,12 @@ const MyAccount = () => {
                 <div className="space-y-3 pt-4">
                   <button
                     onClick={handleLogout}
-                    className="w-full flex items-center justify-center gap-2 bg-darkColor text-white py-4 rounded-2xl font-bold transition-all duration-300 hover:bg-[#1a202c] hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
+                    className="w-full flex items-center justify-center gap-2 bg-darkColor text-white py-3.5 rounded-2xl font-semibold transition-all duration-300 hover:bg-[#1a202c] hover:shadow-lg hover:-translate-y-0.5 active:scale-95"
                   >
                     <HiOutlineLogout className="w-5 h-5" />
                     Logout
                   </button>
-                  <button className="w-full text-red-500 py-2 text-xs font-bold hover:text-red-700 transition-colors uppercase tracking-wider">
+                  <button className="w-full text-red-500 py-2 text-sm font-medium hover:text-red-700 transition-colors tracking-wide">
                     Delete Account
                   </button>
                 </div>
@@ -76,9 +76,9 @@ const MyAccount = () => {
               <div className="flex items-center gap-4 bg-white p-2 rounded-2xl shadow-sm border border-gray-100 w-fit">
                 <button
                   onClick={() => setTab("bookings")}
-                  className={`flex items-center gap-2 px-8 py-3 rounded-xl font-bold transition-all duration-300 ${
+                  className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 ${
                     tab === "bookings"
-                      ? "bg-primaryColor text-white shadow-xl shadow-primaryColor/20 scale-105"
+                      ? "bg-primaryColor text-white shadow-lg shadow-primaryColor/20"
                       : "text-gray-500 hover:bg-gray-50"
                   }`}
                 >
@@ -87,9 +87,9 @@ const MyAccount = () => {
                 </button>
                 <button
                   onClick={() => setTab("settings")}
-                  className={`flex items-center gap-2 px-8 py-3 rounded-xl font-bold transition-all duration-300 ${
+                  className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 ${
                     tab === "settings"
-                      ? "bg-primaryColor text-white shadow-xl shadow-primaryColor/20 scale-105"
+                      ? "bg-primaryColor text-white shadow-lg shadow-primaryColor/20"
                       : "text-gray-500 hover:bg-gray-50"
                   }`}
                 >
@@ -101,8 +101,8 @@ const MyAccount = () => {
               <div className="animate-fade-in">
                 {tab === "bookings" && (
                    <div className="glass-card p-8 lg:p-12 bg-white">
-                      <h3 className="text-2xl font-bold text-darkColor mb-8 flex items-center gap-3">
-                        <span className="w-2 h-8 bg-primaryColor rounded-full"></span>
+                      <h3 className="text-[22px] font-bold text-darkColor mb-8 flex items-center gap-3 tracking-tight">
+                        <span className="w-1.5 h-6 bg-primaryColor rounded-full"></span>
                         Your Appointments
                       </h3>
                       <MyBooking />
@@ -110,8 +110,8 @@ const MyAccount = () => {
                 )}
                 {tab === "settings" && (
                   <div className="glass-card p-8 lg:p-12 bg-white">
-                    <h3 className="text-2xl font-bold text-darkColor mb-8 flex items-center gap-3">
-                      <span className="w-2 h-8 bg-primaryColor rounded-full"></span>
+                    <h3 className="text-[22px] font-bold text-darkColor mb-8 flex items-center gap-3 tracking-tight">
+                      <span className="w-1.5 h-6 bg-primaryColor rounded-full"></span>
                       Update Profile
                     </h3>
                     <Profile user={userData} />

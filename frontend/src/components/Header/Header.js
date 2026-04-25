@@ -59,7 +59,7 @@ const Header = () => {
           <div className="w-10 h-10 bg-primaryColor rounded-xl flex items-center justify-center shadow-lg shadow-primaryColor/20 text-white font-black text-xl">
             +
           </div>
-          <span className="text-2xl font-extrabold tracking-tight text-darkColor">
+          <span className="text-[22px] font-bold tracking-tight text-darkColor">
             Health<span className="text-primaryColor">Care</span>
           </span>
         </Link>
@@ -71,7 +71,7 @@ const Header = () => {
                 <NavLink
                   to={link.path}
                   className={(navClass) =>
-                    `text-base font-bold transition-all duration-300 ${
+                    `text-[15px] font-semibold transition-all duration-300 ${
                       navClass.isActive
                         ? "text-primaryColor"
                         : "text-gray-500 hover:text-primaryColor"
@@ -95,7 +95,7 @@ const Header = () => {
                 </div>
                 <div className="hidden lg:block">
                   <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Welcome back</p>
-                  <p className="text-sm font-bold text-darkColor">{user?.name?.split(' ')[0]}</p>
+                  <p className="text-sm font-semibold text-darkColor">{user?.name?.split(' ')[0]}</p>
                 </div>
               </div>
             </Link>

@@ -5,7 +5,7 @@ const DoctorAbout = ({ name, about, qualifications, experiences }) => {
   return (
     <div>
       <div>
-        <h3 className="text-[22px] leading-[32px] text-darkColor font-bold flex items-center gap-2 mb-4">
+        <h3 className="text-xl leading-[32px] text-darkColor font-semibold flex items-center gap-2 mb-4">
           About
           <span className="text-primaryColor">
             {name}
@@ -15,7 +15,7 @@ const DoctorAbout = ({ name, about, qualifications, experiences }) => {
       </div>
 
       <div className="mt-12">
-        <h3 className="text-[20px] leading-[30px] text-darkColor font-bold mb-6">
+        <h3 className="text-[20px] leading-[30px] text-darkColor font-semibold mb-6">
           Education
         </h3>
 
@@ -27,11 +27,11 @@ const DoctorAbout = ({ name, about, qualifications, experiences }) => {
             >
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                 <div>
-                  <span className="text-primaryColor text-[14px] font-bold bg-blue-50 px-3 py-1 rounded-full">
+                  <span className="text-primaryColor text-[14px] font-semibold bg-blue-50 px-3 py-1 rounded-full">
                     {formateDate(item.startingDate)} -{" "}
                     {formateDate(item.endingDate)}
                   </span>
-                  <h4 className="text-[18px] font-bold text-darkColor mt-3">
+                  <h4 className="text-[18px] font-semibold text-darkColor mt-3">
                     {item.degree}
                   </h4>
                 </div>
@@ -45,18 +45,18 @@ const DoctorAbout = ({ name, about, qualifications, experiences }) => {
       </div>
 
       <div className="mt-12">
-        <h3 className="text-[20px] leading-[30px] text-darkColor font-bold mb-6">
+        <h3 className="text-[20px] leading-[30px] text-darkColor font-semibold mb-6">
           Experience
         </h3>
 
         <ul className="grid md:grid-cols-2 gap-6">
           {experiences?.map((item, index) => (
             <li key={index} className="p-6 rounded-2xl bg-[#f8faff] border border-blue-50 hover:border-primaryColor/20 transition-colors">
-              <span className="text-primaryColor text-[14px] font-bold">
+              <span className="text-primaryColor text-[14px] font-semibold">
                 {formateDate(item.startingDate)} -{" "}
                 {formateDate(item.endingDate)}
               </span>
-              <h4 className="text-[17px] font-bold text-darkColor mt-2">
+              <h4 className="text-[17px] font-semibold text-darkColor mt-2">
                 {item.position}
               </h4>
               <p className="text-[15px] font-medium text-gray-500 mt-1">
