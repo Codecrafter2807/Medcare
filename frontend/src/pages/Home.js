@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
+import { FiUserPlus, FiMapPin, FiCalendar } from "react-icons/fi";
 import ServicesList from "../components/Services/ServicesList";
 import DoctorList from "../components/Doctors/DoctorList";
 import FaqList from "../components/Faq/FaqList";
@@ -82,13 +83,13 @@ const Home = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
-              { title: "Consult a Doctor", icon: "https://images.unsplash.com/photo-1505751172107-573967a465ce?auto=format&fit=crop&q=80&w=200", link: "/doctors" },
-              { title: "Find a Location", icon: "https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?auto=format&fit=crop&q=80&w=200", link: "/doctors" },
-              { title: "Appointments", icon: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=200", link: "/doctors" }
+              { title: "Consult a Doctor", Icon: FiUserPlus, link: "/doctors" },
+              { title: "Find a Location", Icon: FiMapPin, link: "/doctors" },
+              { title: "Appointments", Icon: FiCalendar, link: "/doctors" }
             ].map((item, idx) => (
               <div key={idx} className="glass-card hover-card group p-8 text-center bg-white">
-                <div className="w-24 h-24 mx-auto mb-8 rounded-2xl overflow-hidden shadow-inner bg-gray-50 flex items-center justify-center">
-                   <img src={item.icon} alt={item.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                <div className="w-24 h-24 mx-auto mb-8 rounded-2xl overflow-hidden shadow-sm bg-blue-50 flex items-center justify-center group-hover:bg-primaryColor transition-all duration-500">
+                   <item.Icon className="w-10 h-10 text-primaryColor group-hover:text-white transition-all duration-500" />
                 </div>
                 <h3 className="text-2xl font-bold text-darkColor mb-4">{item.title}</h3>
                 <p className="text-gray-500 mb-8">Access professional medical advice and treatments from the comfort of your home.</p>
