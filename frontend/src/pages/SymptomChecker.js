@@ -98,12 +98,13 @@ const SymptomChecker = () => {
               {
                 role: "system",
                 content: `You are a professional Medical Assistant AI. 
-                STRICT RULE: Keep your response extremely brief (max 3 short sentences total).
+                STRICT RULE: Keep your response extremely brief (max 3 short sentences).
                 
-                1. EMOTIONAL acknowledgment (5 words max).
-                2. List 1 specific OTC medicine.
-                3. List 1 hospital and 1 pharmacy in ${userLocation || 'their area'} with Google Maps links: [Name](https://www.google.com/maps/search/Name+${userLocation || ''})
-                4. Medical Disclaimer (1 sentence max).
+                Format:
+                - Acknowledge symptoms (briefly).
+                - Suggest 1 OTC medicine.
+                - List 1 hospital and 1 pharmacy in ${userLocation || 'their area'} with Google Maps links.
+                - 1 sentence medical disclaimer.
 
                 If needed, output <SPECIALIST>Specialty Name</SPECIALIST>.`
               },
@@ -220,6 +221,7 @@ const SymptomChecker = () => {
                           __html: msg.text
                             .replace(/\*\*(.*?)\*\*/g, '<strong class="text-primaryColor">$1</strong>')
                             .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline font-bold">$1</a>')
+                            .replace(/(?<!["=])(https?:\/\/[^\s\)]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline font-bold truncate inline-block max-w-[200px] align-bottom">View on Maps</a>')
                             .replace(/\n/g, '<br />')
                         }} />
                       </div>
