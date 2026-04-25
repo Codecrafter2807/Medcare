@@ -6,7 +6,6 @@ import ServicesList from "../components/Services/ServicesList";
 import DoctorList from "../components/Doctors/DoctorList";
 import FaqList from "../components/Faq/FaqList";
 import About from "../components/About/About";
-import Testomonial from "../components/Testomonial/Testomonial";
 
 const Home = () => {
   return (
@@ -29,23 +28,6 @@ const Home = () => {
                 </div>
               </div>
               
-              <div className="mt-16 grid grid-cols-3 gap-8">
-                <div>
-                  <h2 className="text-4xl font-bold text-darkColor tracking-tight">500+</h2>
-                  <div className="w-12 h-1.5 bg-yellow-400 rounded-full my-2"></div>
-                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest">Happy Users</p>
-                </div>
-                <div>
-                  <h2 className="text-4xl font-bold text-darkColor tracking-tight">300+</h2>
-                  <div className="w-12 h-1.5 bg-purple-500 rounded-full my-2"></div>
-                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest">Specialists</p>
-                </div>
-                <div>
-                  <h2 className="text-4xl font-bold text-darkColor tracking-tight">100%</h2>
-                  <div className="w-12 h-1.5 bg-blue-500 rounded-full my-2"></div>
-                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest">Care Quality</p>
-                </div>
-              </div>
             </div>
             
             <div className="relative lg:w-[500px]">
@@ -189,16 +171,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="bg-gray-50">
-        <div className="container">
-          <div className="text-center max-w-[600px] mx-auto mb-16">
-            <h2 className="heading mb-4">What our patients say</h2>
-            <p className="textPara mx-auto">Real experiences from our community members who trusted us with their health.</p>
-          </div>
-          <Testomonial />
-        </div>
-      </section>
-      
+
       <div className="w-full border-t border-gray-100"></div>
     </>
   );
