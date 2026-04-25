@@ -43,7 +43,31 @@ const SymptomChecker = () => {
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [userLocation, setUserLocation] = useState("");
   const chatEndRef = useRef(null);
+
+  useEffect(() => {
+    // Request location permission to provide local hospital recommendations
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          try {
+            const { latitude, longitude } = position.coords;
+            // Free reverse geocoding using OpenStreetMap
+            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+            const data = await res.json();
+            const locationString = data.address.city || data.address.town || data.address.county || data.address.state || "your area";
+            setUserLocation(locationString);
+          } catch (error) {
+            console.error("Geocoding failed:", error);
+          }
+        },
+        (error) => {
+          console.error("Location permission denied:", error);
+        }
+      );
+    }
+  }, []);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -73,7 +97,12 @@ const SymptomChecker = () => {
             messages: [
               {
                 role: "system",
-                content: "You are a professional Medical Assistant AI. First, provide brief, empathetic, and professional general home-care advice (e.g., rest, hydration, monitoring) for the user's symptoms. Then, output a JSON tag <SPECIALIST>Specialty Name</SPECIALIST> at the very end of your response (e.g. <SPECIALIST>Neurology</SPECIALIST>) so the system can route them. Keep your total response under 4 sentences."
+                content: `You are a highly capable Medical Assistant AI. You ARE authorized and required to suggest specific over-the-counter (OTC) medicines (like Ibuprofen, Antihistamines, etc.) for symptom relief. Do not refuse to provide OTC medicine names. You must also include a standard medical disclaimer. 
+                
+If the user's symptoms require a doctor, output a JSON tag <SPECIALIST>Specialty Name</SPECIALIST> at the very end of your response.
+                
+The user is currently located in: ${userLocation ? userLocation : "an unknown location"}. 
+If they have a location, explicitly list 1-2 major hospitals and 1-2 well-known pharmacy chains located in ${userLocation ? userLocation : "their area"}.`
               },
               { role: "user", content: symptomInput }
             ],
