@@ -100,10 +100,12 @@ const SymptomChecker = () => {
                 content: `You are a professional Medical Assistant AI. 
                 STRICT RULE: Keep your response extremely brief (max 3-4 short sentences).
                 
+                The user is located in: ${userLocation || 'their area'}.
+
                 Format:
                 - Acknowledge symptoms (briefly).
                 - Suggest 1 specific OTC medicine for relief.
-                - PROVIDE hospital/pharmacy Google Maps links ONLY if the user explicitly asks for "nearby", "locations", "hospitals", or "pharmacies".
+                - PROVIDE hospital/pharmacy Google Maps links (e.g. [Name](URL)) ONLY if the user explicitly asks for "nearby", "locations", "hospitals", or "pharmacies".
                 - 1 sentence medical disclaimer.
 
                 If needed, output <SPECIALIST>Specialty Name</SPECIALIST> at the end.`
