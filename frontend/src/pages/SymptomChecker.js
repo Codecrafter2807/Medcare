@@ -176,7 +176,7 @@ If they have a location, explicitly list 1-2 major hospitals and 1-2 well-known 
           <p className="textPara mx-auto">Get instant, AI-driven recommendations on which medical specialist you should consult based on your current symptoms.</p>
         </div>
 
-        <div className="glass-card bg-white shadow-2xl rounded-[32px] overflow-hidden flex flex-col h-[600px] border border-gray-100">
+        <div className="glass-card bg-white shadow-2xl rounded-[32px] overflow-hidden flex flex-col h-[750px] border border-gray-100">
           
           {/* Chat Header */}
           <div className="bg-primaryColor p-6 flex items-center gap-4 text-white shadow-md z-10">
