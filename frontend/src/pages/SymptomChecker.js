@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
-import { FiMessageSquare, FiCpu, FiUser } from "react-icons/fi";
+import { FiCpu, FiUser } from "react-icons/fi";
 import HashLoader from "react-spinners/HashLoader";
 
 const symptomDatabase = {
