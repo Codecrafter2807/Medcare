@@ -97,16 +97,15 @@ const SymptomChecker = () => {
             messages: [
               {
                 role: "system",
-                content: `You are a highly capable Medical Assistant AI. 
-                Format your responses using clear bullet points and bold text. Avoid long paragraphs.
+                content: `You are a professional Medical Assistant AI. 
+                STRICT RULE: Keep your response extremely brief (max 3 short sentences total).
                 
-                1. Start with a brief, empathetic acknowledgment.
-                2. Suggest specific over-the-counter (OTC) medicines (e.g., Ibuprofen, Antihistamines) for relief.
-                3. Provide 1-2 major hospitals and 1-2 pharmacy chains in ${userLocation || 'their area'}.
-                   For EACH hospital or pharmacy, you MUST include a Google Maps link in this exact format: [Name](https://www.google.com/maps/search/Name+${userLocation || ''})
-                4. Always include a standard medical disclaimer.
+                1. EMOTIONAL acknowledgment (5 words max).
+                2. List 1 specific OTC medicine.
+                3. List 1 hospital and 1 pharmacy in ${userLocation || 'their area'} with Google Maps links: [Name](https://www.google.com/maps/search/Name+${userLocation || ''})
+                4. Medical Disclaimer (1 sentence max).
 
-                If the symptoms require a doctor, output <SPECIALIST>Specialty Name</SPECIALIST> at the very end.`
+                If needed, output <SPECIALIST>Specialty Name</SPECIALIST>.`
               },
               { role: "user", content: symptomInput }
             ],
@@ -180,50 +179,61 @@ const SymptomChecker = () => {
           <p className="textPara mx-auto">Get instant, AI-driven recommendations on which medical specialist you should consult based on your current symptoms.</p>
         </div>
 
-        <div className="glass-card bg-white shadow-2xl rounded-[32px] overflow-hidden flex flex-col h-[750px] border border-gray-100">
+        <div className="glass-card bg-white shadow-2xl rounded-[32px] overflow-hidden flex flex-col h-[700px] border border-gray-100 relative">
           
-          {/* Chat Header */}
-          <div className="bg-primaryColor p-6 flex items-center gap-4 text-white shadow-md z-10">
-            <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
-              <FiMessageSquare className="w-6 h-6" />
+          {/* Chat Header - Redesigned for premium feel */}
+          <div className="bg-gradient-to-r from-primaryColor to-blue-600 p-8 flex items-center justify-between text-white shadow-lg z-10">
+            <div className="flex items-center gap-5">
+              <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center backdrop-blur-md border border-white/30 shadow-inner">
+                <FiCpu className="w-8 h-8" />
+              </div>
+              <div>
+                <h3 className="font-bold text-xl tracking-tight leading-none mb-1">Medcare AI Assistant</h3>
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                  <p className="text-white/80 text-xs font-semibold uppercase tracking-widest">Active & Ready</p>
+                </div>
+              </div>
             </div>
-            <div>
-              <h3 className="font-bold text-lg leading-none">Medical Assistant AI</h3>
-              <p className="text-white/80 text-sm mt-1">Online & ready to help</p>
-            </div>
+            <button 
+              onClick={() => setMessages([{ sender: "ai", text: "Hello! I'm here to help. What symptoms are you experiencing?" }])}
+              className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-xs font-bold transition-all border border-white/20 backdrop-blur-sm"
+            >
+              Clear Chat
+            </button>
           </div>
 
-          {/* Chat Messages */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-gray-50/30">
+          {/* Chat Messages - Better spacing and bubble styles */}
+          <div className="flex-1 overflow-y-auto p-8 space-y-8 bg-[#f8fafc]">
             {messages.map((msg, idx) => (
-              <div key={idx} className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
-                <div className={`flex gap-3 max-w-[85%] md:max-w-[75%] ${msg.sender === "user" ? "flex-row-reverse" : "flex-row"}`}>
+              <div key={idx} className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"} animate-fadeIn`}>
+                <div className={`flex gap-4 max-w-[85%] md:max-w-[70%] ${msg.sender === "user" ? "flex-row-reverse" : "flex-row"}`}>
                   
-                  <div className={`w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-sm ${msg.sender === "user" ? "bg-darkColor text-white" : "bg-white text-primaryColor border border-gray-100"}`}>
+                  <div className={`w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center shadow-md ${msg.sender === "user" ? "bg-darkColor text-white" : "bg-white text-primaryColor border border-gray-100"}`}>
                     {msg.sender === "user" ? <FiUser className="w-5 h-5" /> : <FiCpu className="w-5 h-5" />}
                   </div>
 
-                  <div className={`p-4 rounded-2xl shadow-sm ${msg.sender === "user" ? "bg-darkColor text-white rounded-tr-none" : "bg-white text-gray-700 border border-gray-100 rounded-tl-none"}`}>
+                  <div className={`p-5 rounded-3xl shadow-sm leading-relaxed ${msg.sender === "user" ? "bg-primaryColor text-white rounded-tr-none" : "bg-white text-gray-700 border border-gray-200 rounded-tl-none"}`}>
                     {msg.sender === 'ai' ? (
-                      <div className="prose prose-sm max-w-none">
+                      <div className="prose prose-sm max-w-none ai-response">
                         <span dangerouslySetInnerHTML={{ 
                           __html: msg.text
                             .replace(/\*\*(.*?)\*\*/g, '<strong class="text-primaryColor">$1</strong>')
-                            .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-primaryColor underline font-bold">$1</a>')
+                            .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline font-bold">$1</a>')
                             .replace(/\n/g, '<br />')
                         }} />
                       </div>
                     ) : (
-                      <span>{msg.text}</span>
+                      <span className="font-medium">{msg.text}</span>
                     )}
 
                     {msg.specialty && (
-                      <div className="mt-4">
+                      <div className="mt-5 pt-4 border-t border-gray-100">
                         <Link 
                           to={`/doctors?query=${encodeURIComponent(msg.specialty)}`}
-                          className="inline-flex items-center gap-2 px-5 py-2.5 bg-primaryColor/10 text-primaryColor font-bold rounded-xl hover:bg-primaryColor hover:text-white transition-all duration-300"
+                          className="inline-flex items-center gap-2 px-6 py-3 bg-primaryColor text-white font-bold rounded-2xl hover:bg-darkColor transition-all duration-300 shadow-lg shadow-primaryColor/20"
                         >
-                          Find {msg.specialty} Doctors <BsArrowRight />
+                          Book {msg.specialty} <BsArrowRight />
                         </Link>
                       </div>
                     )}
@@ -233,14 +243,14 @@ const SymptomChecker = () => {
             ))}
 
             {isAnalyzing && (
-              <div className="flex justify-start">
-                <div className="flex gap-3 max-w-[80%]">
-                  <div className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center shadow-sm bg-white text-primaryColor border border-gray-100">
+              <div className="flex justify-start animate-pulse">
+                <div className="flex gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white text-primaryColor border border-gray-100 flex items-center justify-center shadow-sm">
                     <FiCpu className="w-5 h-5" />
                   </div>
-                  <div className="p-4 rounded-2xl shadow-sm bg-white border border-gray-100 rounded-tl-none flex items-center gap-3">
-                    <HashLoader size={20} color="#0066ff" />
-                    <span className="text-gray-500 font-semibold text-sm">AI is analyzing symptoms...</span>
+                  <div className="p-5 rounded-3xl bg-white border border-gray-100 rounded-tl-none flex items-center gap-4">
+                    <HashLoader size={18} color="#0066ff" />
+                    <span className="text-gray-400 font-bold text-xs uppercase tracking-tighter">AI Analysis in progress...</span>
                   </div>
                 </div>
               </div>
@@ -248,37 +258,36 @@ const SymptomChecker = () => {
             <div ref={chatEndRef} />
           </div>
 
-          {/* Chat Input Area */}
-          <div className="p-4 md:p-6 bg-white border-t border-gray-100">
-            {/* Quick Chips */}
-            <div className="flex flex-wrap gap-2 mb-4">
+          {/* Chat Input Area - Compacted and refined */}
+          <div className="p-6 bg-white border-t border-gray-100 shadow-[0_-10px_25px_-15px_rgba(0,0,0,0.1)]">
+            <div className="flex flex-wrap gap-2 mb-5">
               {commonSymptoms.map((symp, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSymptomSubmit(symp)}
                   disabled={isAnalyzing}
-                  className="px-4 py-2 bg-gray-50 hover:bg-primaryColor/10 text-gray-600 hover:text-primaryColor text-sm font-semibold rounded-full border border-gray-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-3 py-1.5 bg-blue-50/50 hover:bg-primaryColor text-primaryColor hover:text-white text-[11px] font-black uppercase tracking-widest rounded-lg border border-blue-100/50 transition-all duration-300 disabled:opacity-50"
                 >
                   {symp}
                 </button>
               ))}
             </div>
 
-            <form onSubmit={handleFormSubmit} className="flex gap-3">
+            <form onSubmit={handleFormSubmit} className="flex gap-3 relative">
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Type your symptoms here..."
+                placeholder="Describe your symptoms..."
                 disabled={isAnalyzing}
-                className="flex-1 px-5 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primaryColor/20 focus:border-primaryColor transition-all duration-300 disabled:bg-gray-100"
+                className="flex-1 px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-primaryColor/20 transition-all duration-300 disabled:opacity-50 font-medium placeholder:text-gray-400"
               />
               <button 
                 type="submit" 
                 disabled={isAnalyzing || !inputValue.trim()}
-                className="btn !m-0 !py-4 !px-8 shadow-md disabled:opacity-50 flex items-center gap-2"
+                className="w-14 h-14 bg-primaryColor hover:bg-darkColor text-white rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xl shadow-primaryColor/20 disabled:opacity-50 group"
               >
-                Analyze
+                <BsArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
               </button>
             </form>
           </div>
