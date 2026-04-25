@@ -85,6 +85,12 @@ const SymptomChecker = () => {
       const apiKey = process.env.REACT_APP_GROQ_API_KEY || process.env.VITE_GROQ_API_KEY;
       
       if (apiKey) {
+        // Map messages to Groq format
+        const chatHistory = messages.map(msg => ({
+          role: msg.sender === 'user' ? 'user' : 'assistant',
+          content: msg.text
+        }));
+
         // Real Groq API Call
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
           method: "POST",
@@ -97,22 +103,22 @@ const SymptomChecker = () => {
             messages: [
               {
                 role: "system",
-                content: `You are a professional Medical Assistant AI. 
-                STRICT RULE: Keep your response extremely brief (max 3-4 short sentences).
+                content: `You are a professional Medical Doctor. 
+                Your goal is to act as a consultant: ask 1-2 targeted diagnostic questions (e.g., "When did it start?", "Is the pain sharp?") before giving a final recommendation.
                 
                 The user is located in: ${userLocation || 'their area'}.
 
-                Format:
-                - Acknowledge symptoms (briefly).
-                - Suggest 1 specific OTC medicine for relief.
-                - PROVIDE hospital/pharmacy Google Maps links (e.g. [Name](URL)) ONLY if the user explicitly asks for "nearby", "locations", "hospitals", or "pharmacies".
-                - 1 sentence medical disclaimer.
-
-                If needed, output <SPECIALIST>Specialty Name</SPECIALIST> at the end.`
+                STRICT GUIDELINES:
+                1. Maintain a professional, clinical yet empathetic doctor persona.
+                2. Suggest 1 relevant OTC medicine for relief.
+                3. ONLY provide hospital/pharmacy links if explicitly asked for "nearby" or "locations".
+                4. Always end with a professional medical disclaimer.
+                5. Output <SPECIALIST>Specialty Name</SPECIALIST> only when you are confident which specialist is needed.`
               },
+              ...chatHistory,
               { role: "user", content: symptomInput }
             ],
-            temperature: 0.5,
+            temperature: 0.6,
           }),
         });
 
