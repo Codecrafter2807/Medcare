@@ -24,7 +24,6 @@ const navLinks = [
 ];
 const Header = () => {
   const headerRef = useRef(null);
-  const menuRef = useRef(null);
   const { user, role, token } = useContext(authContext);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
