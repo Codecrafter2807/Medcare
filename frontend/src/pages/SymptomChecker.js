@@ -97,12 +97,16 @@ const SymptomChecker = () => {
             messages: [
               {
                 role: "system",
-                content: `You are a highly capable Medical Assistant AI. You ARE authorized and required to suggest specific over-the-counter (OTC) medicines (like Ibuprofen, Antihistamines, etc.) for symptom relief. Do not refuse to provide OTC medicine names. You must also include a standard medical disclaimer. 
+                content: `You are a highly capable Medical Assistant AI. 
+                Format your responses using clear bullet points and bold text. Avoid long paragraphs.
                 
-If the user's symptoms require a doctor, output a JSON tag <SPECIALIST>Specialty Name</SPECIALIST> at the very end of your response.
-                
-The user is currently located in: ${userLocation ? userLocation : "an unknown location"}. 
-If they have a location, explicitly list 1-2 major hospitals and 1-2 well-known pharmacy chains located in ${userLocation ? userLocation : "their area"}.`
+                1. Start with a brief, empathetic acknowledgment.
+                2. Suggest specific over-the-counter (OTC) medicines (e.g., Ibuprofen, Antihistamines) for relief.
+                3. Provide 1-2 major hospitals and 1-2 pharmacy chains in ${userLocation || 'their area'}.
+                   For EACH hospital or pharmacy, you MUST include a Google Maps link in this exact format: [Name](https://www.google.com/maps/search/Name+${userLocation || ''})
+                4. Always include a standard medical disclaimer.
+
+                If the symptoms require a doctor, output <SPECIALIST>Specialty Name</SPECIALIST> at the very end.`
               },
               { role: "user", content: symptomInput }
             ],
@@ -200,8 +204,15 @@ If they have a location, explicitly list 1-2 major hospitals and 1-2 well-known 
                   </div>
 
                   <div className={`p-4 rounded-2xl shadow-sm ${msg.sender === "user" ? "bg-darkColor text-white rounded-tr-none" : "bg-white text-gray-700 border border-gray-100 rounded-tl-none"}`}>
-                    {msg.text.includes("**") ? (
-                      <span dangerouslySetInnerHTML={{ __html: msg.text.replace(/\*\*(.*?)\*\*/g, '<strong class="text-primaryColor">$1</strong>') }} />
+                    {msg.sender === 'ai' ? (
+                      <div className="prose prose-sm max-w-none">
+                        <span dangerouslySetInnerHTML={{ 
+                          __html: msg.text
+                            .replace(/\*\*(.*?)\*\*/g, '<strong class="text-primaryColor">$1</strong>')
+                            .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-primaryColor underline font-bold">$1</a>')
+                            .replace(/\n/g, '<br />')
+                        }} />
+                      </div>
                     ) : (
                       <span>{msg.text}</span>
                     )}
